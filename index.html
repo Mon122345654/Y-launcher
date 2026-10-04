@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Y Launcher – Minecraft launcher with instances and mods</title>
+<style>
+:root{--bg:#16181c;--s:#1d1f23;--s2:#26292f;--s3:#2e3138;--bd:#34373e;--tx:#ecf0f4;--mu:#96a2b0;--ac:#1bd96a;--acd:#129e4d;--soft:rgba(27,217,106,.14);--dg:#ff496e}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;background:var(--bg);color:var(--tx);font:400 15px/1.6 "Segoe UI",Inter,"Helvetica Neue",Arial,sans-serif;padding-top:env(safe-area-inset-top,0);padding-bottom:env(safe-area-inset-bottom,0)}
+a{color:inherit;text-decoration:none}:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.w{max-width:1100px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:env(safe-area-inset-top,0);z-index:5;background:rgba(22,24,28,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--bd)}
+.bar{display:flex;align-items:center;gap:18px;height:58px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px}
+.logo i{width:28px;height:28px;border-radius:8px;background:var(--ac);color:#06170d;display:grid;place-items:center;font-style:normal;font-weight:800}
+nav{margin-left:auto;display:flex;gap:20px;color:var(--mu);font-size:14px}nav a:hover{color:var(--tx)}
+select,input{font:inherit;color:var(--tx);background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:9px 12px;min-width:0}
+select:hover,input:hover{border-color:#454952}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--ac);color:#06170d;font-weight:700;border:0;border-radius:10px;padding:10px 18px;cursor:pointer;transition:background .15s,transform .15s}
+.btn:hover{background:#3be883;transform:translateY(-1px)}.btn.g{background:var(--s2);color:var(--tx);border:1px solid var(--bd)}.btn.g:hover{background:var(--s3)}.btn.sm{padding:6px 12px;font-size:13px}
+.hero{display:grid;grid-template-columns:1fr 1.05fr;gap:40px;align-items:center;padding:64px 0 40px}
+.tag{display:inline-block;color:var(--ac);background:var(--soft);border-radius:99px;padding:3px 12px;font-size:12px;font-weight:700}
+h1{font-size:clamp(34px,5.5vw,56px);line-height:1.06;letter-spacing:-.03em;margin:16px 0}
+.lead{color:var(--mu);font-size:17px;max-width:46ch}.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.app{display:grid;grid-template-columns:58px 1fr;background:var(--s);border:1px solid var(--bd);border-radius:16px;overflow:hidden;min-height:290px;box-shadow:0 30px 70px -30px rgba(27,217,106,.25)}
+.sb{background:var(--bg);border-right:1px solid var(--bd);display:flex;flex-direction:column;align-items:center;gap:10px;padding:12px 0}
+.sb b{width:34px;height:34px;border-radius:10px;background:var(--s2)}.sb b.a{background:var(--ac)}.sb b.p{background:var(--soft);border:2px solid var(--ac)}.sb em{flex:1}
+.mn{padding:18px;display:grid;gap:10px;align-content:start}.mn h4{margin:0 0 4px;font-size:18px}
+.lab{font-size:11px;font-weight:700;color:var(--mu);letter-spacing:.04em}
+.fld{background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:9px 12px;display:flex;justify-content:space-between}.fld small{color:var(--mu)}
+.pnl{background:var(--s2);border:1px solid var(--bd);border-radius:12px;padding:10px;display:grid;gap:6px}.pnl .two{display:grid;grid-template-columns:1fr 1fr;gap:8px}.pnl .fld{background:var(--s);font-size:14px}
+.cr{display:inline-block;width:16px;height:16px;border-radius:4px;background:#4caf3a;vertical-align:-3px;margin-right:8px}
+.seg{display:flex;width:max-content;border:1px solid var(--bd);border-radius:8px;overflow:hidden}.seg span{padding:4px 12px;font-size:12px;color:var(--mu)}.seg span.on{background:var(--ac);color:#06170d;font-weight:700}
+.pb{height:5px;border-radius:9px;background:var(--s3)}.log{height:40px;border-radius:10px;background:#101114}.msb{justify-self:start}
+.btn.don{background:#ff6b8b;color:#1a0610}.btn.don:hover{background:#ff86a0}.more{text-align:center;margin-top:6px}
+.play{background:var(--ac);color:#06170d;font-weight:700;border-radius:10px;padding:10px;text-align:center}
+section{padding:52px 0}h2{font-size:clamp(24px,3.2vw,32px);letter-spacing:-.02em;margin:0 0 6px}.sub{color:var(--mu);margin:0 0 24px;max-width:62ch}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{background:var(--s);border:1px solid var(--bd);border-radius:14px;padding:18px}
+.card h3{margin:0 0 4px;font-size:16px}.card p{margin:0;color:var(--mu);font-size:13.5px}
+.tabs{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}.tabs button{background:var(--s);color:var(--mu);border:1px solid var(--bd);border-radius:99px;padding:6px 16px;cursor:pointer;font:inherit;font-size:14px}
+.tabs button.on{background:var(--soft);border-color:var(--ac);color:var(--ac);font-weight:700}
+.fl{display:grid;grid-template-columns:1fr 150px 150px 150px;gap:8px;margin-bottom:8px}
+.st{display:flex;justify-content:space-between;gap:10px;color:var(--mu);font-size:13px;margin:8px 2px 12px;flex-wrap:wrap}
+.badge{border-radius:99px;padding:1px 10px;font-weight:700;font-size:12px}.live{background:var(--soft);color:var(--ac)}.demo{background:rgba(255,196,60,.14);color:#ffc43c}
+.res{display:grid;gap:10px}.mod{display:flex;gap:14px;background:var(--s);border:1px solid var(--bd);border-radius:14px;padding:14px;align-items:center}
+.mod:hover{border-color:#454952}.ic{flex:none;width:56px;height:56px;border-radius:12px;background:var(--s2) center/cover;display:grid;place-items:center;font-weight:800;color:var(--ac);font-size:22px}
+.mod h4{margin:0;font-size:16px}.mod h4 small{color:var(--mu);font-weight:400;font-size:13px}.mod p{margin:2px 0 0;color:var(--mu);font-size:13px}.mod .m{margin-left:auto;text-align:right;color:var(--mu);font-size:12px;white-space:nowrap;display:grid;gap:6px;justify-items:end}
+.empty{padding:28px;text-align:center;color:var(--mu);border:1px dashed var(--bd);border-radius:14px}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.65);display:none;align-items:center;justify-content:center;z-index:20;padding:16px}.ov.on{display:flex}
+.dlg{background:var(--s);border:1px solid var(--bd);border-radius:16px;padding:20px;width:min(560px,100%);max-height:86vh;overflow:auto}
+.dlg h3{margin:0 0 2px}.dr{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}.dr label{display:grid;gap:4px}
+.vl{display:grid;gap:6px}.ver{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--s2);border-radius:10px;padding:8px 12px;font-size:13.5px}
+.ver small{color:var(--mu)}.rel{color:var(--ac)}.bet{color:#ffc43c}.alp{color:var(--dg)}
+.ab{display:grid;grid-template-columns:1.1fr 1fr;gap:30px}.ab p{color:var(--mu);margin:0 0 12px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}.chips span{background:var(--soft);color:var(--ac);border-radius:8px;padding:3px 12px;font-weight:700;font-size:13px}
+.fe{display:grid;gap:8px}.fe div{background:var(--s);border:1px solid var(--bd);border-radius:12px;padding:10px 14px}.fe b{display:block;font-size:14px}.fe span{color:var(--mu);font-size:13px}
+.ev{margin-top:18px;border-left:3px solid var(--ac);padding-left:14px;color:var(--mu)}.ev b{color:var(--tx)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}td{padding:8px 10px;border-top:1px solid var(--bd);color:var(--mu);vertical-align:top}td:first-child{color:var(--tx);font-family:Consolas,monospace;white-space:nowrap;font-size:12.5px}
+.tw{overflow-x:auto;background:var(--s);border:1px solid var(--bd);border-radius:14px}
+.dls .card{display:flex;flex-direction:column;gap:6px}.dls span{color:var(--mu);font-size:13px;margin-bottom:8px}.dls .card:hover{border-color:var(--ac)}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0));transform:translate(-50%,20px);background:var(--ac);color:#06170d;font-weight:700;padding:10px 18px;border-radius:12px;opacity:0;pointer-events:none;transition:.25s;z-index:30;max-width:90vw;text-align:center}#toast.on{opacity:1;transform:translate(-50%,0)}
+footer{border-top:1px solid var(--bd);padding:28px 0;color:var(--mu);font-size:13.5px;text-align:center}
+@media(max-width:860px){#hdon{margin-left:auto}#hdon+#lang{margin-left:0}.hero,.ab,.g3{grid-template-columns:1fr}nav{display:none}.fl{grid-template-columns:1fr 1fr}.fl input{grid-column:1/-1}.mod .m small{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header><div class="w bar"><a class="logo" href="#top"><i>Y</i>Y Launcher</a>
+<nav><a href="#features" data-i="nF"></a><a href="#mods" data-i="nM"></a><a href="#about" data-i="nA"></a><a href="#download" data-i="nD"></a></nav>
+<a class="btn don sm" id="hdon" href="https://donatello.to/monq12" target="_blank" rel="noopener" data-i="sup"></a><select id="lang" aria-label="Language"><option value="en">English (UK)</option><option value="ru">Русский</option><option value="uk">Українська</option></select></div></header>
+<main id="top">
+<div class="w hero"><div><span class="tag" data-i="tag"></span><h1 data-i="h1"></h1><p class="lead" data-i="lead"></p>
+<div class="cta"><a class="btn" href="Y-Launcher.exe" download data-dl data-i="dl"></a><a class="btn g" href="#mods" data-i="try"></a><a class="btn don" href="https://donatello.to/monq12" target="_blank" rel="noopener" data-i="sup"></a></div></div>
+<div class="app"><div class="sb" aria-hidden="true"><b class="p"></b><b class="a"></b><b></b><b></b><em></em><b></b></div>
+<div class="mn"><h4>Quick Play</h4><div class="pnl"><div class="two"><div><div class="lab">PROFILE</div><div class="fld"><span><i class="cr"></i>Mon1</span><small>Change</small></div></div><div><div class="lab">VERSION</div><div class="fld">1.21.11 <small>▾</small></div></div></div>
+<div class="lab">MOD LOADER</div><div class="seg"><span class="on">Vanilla</span><span>Fabric</span><span>Forge</span></div></div>
+<div class="play">PLAY</div><div class="pb"></div><div class="lab" data-i="rdy"></div><div class="log"></div>
+<button class="btn g sm msb" data-ms data-i="msb"></button></div></div></div>
+
+<section id="features"><div class="w"><h2 data-i="fH"></h2><p class="sub" data-i="fP"></p>
+<div class="g3" id="fc"></div></div></section>
+
+<section id="mods"><div class="w"><h2 data-i="mH"></h2><p class="sub" data-i="mP"></p>
+<div class="tabs" id="tabs"></div>
+<div class="fl"><input id="q" type="search" autocomplete="off" data-ph="ph" aria-label="Search"><select id="sort" aria-label="Sort"></select><select id="ver" aria-label="Minecraft version"></select><select id="ldr" aria-label="Mod loader"></select></div>
+<div class="st"><span id="cnt"></span><span id="src"></span></div>
+<div class="res" id="res" aria-live="polite"></div></div></section>
+
+<section id="about"><div class="w ab"><div><h2 data-i="aH"></h2><p data-i="a1"></p><p data-i="a2"></p><p data-i="a3"></p>
+<div class="chips"><span>JavaFX 21</span><span>Maven</span><span>Gson</span><span>JDK 17+</span></div>
+<div class="ev"><b data-i="eH"></b><br><span data-i="e"></span></div></div><div class="fe" id="fe"></div></div>
+<div class="w" style="margin-top:34px"><h2 style="font-size:22px" data-i="cH"></h2><div class="tw"><table id="code"></table></div></div></section>
+
+<section id="download"><div class="w"><h2 data-i="dH"></h2><p class="sub" data-i="dP"></p>
+<div class="g3 dls"><div class="card"><h3>Windows</h3><span>.exe</span><a class="btn" href="Y-Launcher.exe" download data-dl data-i="db"></a></div></div></div></section>
+</main>
+<footer><div class="w"><p><a class="btn don sm" href="https://donatello.to/monq12" target="_blank" rel="noopener" data-i="sup"></a></p><p data-i="disc"></p><p>© 2026 Y Launcher</p></div></footer>
+
+<div class="ov" id="ov"><div class="dlg" role="dialog" aria-modal="true"><h3 id="dt"></h3><div class="mu" id="dd" style="color:var(--mu);font-size:13px"></div>
+<div class="dr"><label><span class="lab" data-i="lv"></span><select id="dv"></select></label><label><span class="lab" data-i="ll"></span><select id="dl2"></select></label></div>
+<div class="vl" id="vl"></div><div style="text-align:right;margin-top:14px"><button class="btn g sm" id="x" data-i="close"></button></div></div></div>
+<div class="ov" id="ov2"><div class="dlg" role="dialog" aria-modal="true"><h3 id="m2t"></h3><p id="m2d" style="color:var(--mu)"></p><div style="text-align:right;margin-top:14px;display:flex;gap:8px;justify-content:flex-end"><a class="btn don sm" href="https://donatello.to/monq12" target="_blank" rel="noopener" data-i="sup"></a><button class="btn sm" id="m2x" data-i="ok"></button></div></div></div>
+<div id="toast" role="status"></div>
+
+<script>
+const T={
+en:{nF:"Features",nM:"Mods",nA:"About",nD:"Download",tag:"Open beta",h1:"A modern launcher with instances and mods.",lead:"Y Launcher is a JavaFX Minecraft launcher with a clean dark UI: profiles, separate instances, a built-in mod browser and Fabric, Forge and Quilt support.",dl:"Download",try:"Try mod search",fH:"What it does",fP:"Everything below is taken from the launcher's source code.",
+mH:"Search mods",mP:"The same search the launcher uses. Filter by Minecraft version and loader, then pick a different file version or loader for any mod.",ph:"Search mods…",allV:"Any version",allL:"Any loader",tabs:["Mods","Shaders","Resource Packs"],sorts:["Relevance","Downloads","Follows","Newest","Updated"],none:"Nothing found.",res:"results",by:"by",dn:"downloads",choose:"Versions",live:"Live data",demo:"Demo data (catalogue not reachable from this page)",lv:"MINECRAFT VERSION",ll:"MOD LOADER",close:"Close",nov:"No files for this version and loader.",get:"Download file",
+aH:"About Y Launcher",a1:"Y Launcher is written in Java with JavaFX 21 and built with Maven. Gson reads and writes its JSON data, and a public mod API powers search and downloads. A shaded jar runs with a plain java -jar.",a2:"Each instance has its own folder for mods, shaders, resource packs and saves, while libraries, assets and versions stay shared. The launch pipeline downloads what a version needs, picks a matching Java and starts the game.",a3:"The launcher is in beta. Quick Play keeps the classic screen: any version with Vanilla, Fabric or Forge in a shared game folder.",eH:"Minecraft EULA",e:"Y Launcher is free to use and does not sell the game or its content. It is supported by donations and server hosting partnerships.",
+cH:"Code layout",dH:"Download Y Launcher",dP:"Free for Windows. Requires JDK 17 or newer (JDK 21 recommended); missing Java versions can be downloaded from Settings.",db:"Download for Windows",sup:"Support the project",msb:"Sign in with Microsoft",rdy:"Ready",more:"Load more",dls:"Download started",mst:"Microsoft sign-in is not available yet",msd:"For now you can play with a saved nickname. Microsoft sign-in will be added in a future update.",ok:"OK",disc:"Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.",
+f:[["Profiles","Saved nicknames. Microsoft sign-in is not available yet."],["Instances","Name, Minecraft version, loader and loader version, each in its own folder."],["Mod browser","Mods, shaders and resource packs with search, sorting and version filter."],["Smart installs","Required dependencies are pulled in and every file is SHA-1 verified."],["Java manager","Detect, browse for or download Temurin runtimes automatically."],["Four languages","English, Ukrainian, Belarusian and Russian, switched instantly."]],
+fe:[["Fabric, Forge and Quilt","Plus Vanilla. NeoForge is not included yet."],["Lightweight","One JavaFX app with only two dependencies."],["Clean dark design","Light theme switch included."],["Per-instance launching","Own game directory, loader version and Java."]],
+code:[["mods.*","API client and installer"],["instance.*","Instance model and store"],["account.*","Profiles, Gson store, Microsoft login"],["LoaderInstaller, ModLoaders","Fabric, Forge and Quilt versions"],["JavaManager","Detect and download Java"],["GameInstaller, GameLauncher","Launch pipeline"],["i18n.I18n","Live language switching"],["ui.*","Shell, sidebar, views, dialogs"]]},
+ru:{nF:"Возможности",nM:"Моды",nA:"О проекте",nD:"Скачать",tag:"Открытая бета",h1:"Современный лаунчер с инстансами и модами.",lead:"Y Launcher — лаунчер Minecraft на JavaFX с тёмным интерфейсом: профили, отдельные инстансы, встроенный браузер модов и поддержка Fabric, Forge и Quilt.",dl:"Скачать",try:"Попробовать поиск",fH:"Что умеет",fP:"Всё ниже взято из исходного кода лаунчера.",
+mH:"Поиск модов",mP:"Тот же поиск, что и в лаунчере. Фильтруйте по версии Minecraft и загрузчику, затем выберите другую версию файла или загрузчик для любого мода.",ph:"Поиск модов…",allV:"Любая версия",allL:"Любой загрузчик",tabs:["Моды","Шейдеры","Ресурспаки"],sorts:["Релевантность","Загрузки","Подписки","Новые","Обновлённые"],none:"Ничего не найдено.",res:"результатов",by:"от",dn:"загрузок",choose:"Версии",live:"Живые данные",demo:"Демо-данные (каталог недоступен с этой страницы)",lv:"ВЕРСИЯ MINECRAFT",ll:"ЗАГРУЗЧИК",close:"Закрыть",nov:"Нет файлов для этой версии и загрузчика.",get:"Скачать файл",
+aH:"О Y Launcher",a1:"Y Launcher написан на Java с JavaFX 21 и собирается через Maven. Gson читает и пишет JSON-данные, а публичный API модов отвечает за поиск и загрузки. Shaded-jar запускается обычным java -jar.",a2:"У каждого инстанса своя папка для модов, шейдеров, ресурспаков и миров, а библиотеки, ассеты и версии общие. Конвейер запуска скачивает нужное, подбирает подходящую Java и запускает игру.",a3:"Лаунчер в бета-версии. Быстрая игра сохраняет классический экран: любая версия с Vanilla, Fabric или Forge в общей папке игры.",eH:"EULA Minecraft",e:"Y Launcher бесплатен и не продаёт игру или её контент. Проект поддерживается пожертвованиями и партнёрствами по хостингу серверов.",
+cH:"Структура кода",dH:"Скачать Y Launcher",dP:"Бесплатно для Windows. Нужен JDK 17 или новее (рекомендуется 21); недостающие версии Java можно скачать в настройках.",db:"Скачать для Windows",sup:"Поддержать проект",msb:"Войти через Microsoft",rdy:"Готово",more:"Показать ещё",dls:"Загрузка началась",mst:"Вход через Microsoft пока недоступен",msd:"Пока можно играть с сохранённым ником. Вход через Microsoft добавим в одном из обновлений.",ok:"OK",disc:"Не является официальным продуктом Minecraft. Не одобрено и не связано с Mojang или Microsoft.",
+f:[["Профили","Сохранённые ники. Вход через Microsoft пока недоступен."],["Инстансы","Название, версия Minecraft, загрузчик и его версия — каждый в своей папке."],["Браузер модов","Моды, шейдеры и ресурспаки с поиском, сортировкой и фильтром по версии."],["Умная установка","Обязательные зависимости подтягиваются, каждый файл проверяется по SHA-1."],["Менеджер Java","Поиск, выбор или автоматическая загрузка Temurin."],["Четыре языка","Английский, украинский, белорусский и русский, мгновенное переключение."]],
+fe:[["Fabric, Forge и Quilt","И Vanilla. NeoForge пока не поддерживается."],["Лёгкий","Одно приложение JavaFX и всего две зависимости."],["Чистый тёмный дизайн","Есть переключатель светлой темы."],["Запуск по инстансам","Своя папка игры, версия загрузчика и Java."]],
+code:[["mods.*","Клиент API и установщик"],["instance.*","Модель и хранилище инстансов"],["account.*","Профили, хранилище Gson, вход Microsoft"],["LoaderInstaller, ModLoaders","Версии Fabric, Forge и Quilt"],["JavaManager","Поиск и загрузка Java"],["GameInstaller, GameLauncher","Конвейер запуска"],["i18n.I18n","Живое переключение языка"],["ui.*","Оболочка, боковая панель, экраны, диалоги"]]},
+uk:{nF:"Можливості",nM:"Моди",nA:"Про проєкт",nD:"Завантажити",tag:"Відкрита бета",h1:"Сучасний лаунчер з інстансами та модами.",lead:"Y Launcher — лаунчер Minecraft на JavaFX з темним інтерфейсом: профілі, окремі інстанси, вбудований браузер модів і підтримка Fabric, Forge та Quilt.",dl:"Завантажити",try:"Спробувати пошук",fH:"Що вміє",fP:"Усе нижче взято з вихідного коду лаунчера.",
+mH:"Пошук модів",mP:"Той самий пошук, що й у лаунчері. Фільтруйте за версією Minecraft і завантажувачем, а тоді оберіть іншу версію файлу чи завантажувач для будь-якого мода.",ph:"Пошук модів…",allV:"Будь-яка версія",allL:"Будь-який завантажувач",tabs:["Моди","Шейдери","Ресурспаки"],sorts:["Релевантність","Завантаження","Підписки","Нові","Оновлені"],none:"Нічого не знайдено.",res:"результатів",by:"від",dn:"завантажень",choose:"Версії",live:"Живі дані",demo:"Демо-дані (каталог недоступний з цієї сторінки)",lv:"ВЕРСІЯ MINECRAFT",ll:"ЗАВАНТАЖУВАЧ",close:"Закрити",nov:"Немає файлів для цієї версії та завантажувача.",get:"Завантажити файл",
+aH:"Про Y Launcher",a1:"Y Launcher написано на Java з JavaFX 21 і збирається через Maven. Gson читає й записує JSON-дані, а публічний API модів відповідає за пошук і завантаження. Shaded-jar запускається звичайним java -jar.",a2:"Кожен інстанс має власну теку для модів, шейдерів, ресурспаків і світів, а бібліотеки, ассети та версії спільні. Конвеєр запуску завантажує потрібне, добирає відповідну Java і запускає гру.",a3:"Лаунчер у бета-версії. Швидка гра зберігає класичний екран: будь-яка версія з Vanilla, Fabric або Forge у спільній теці гри.",eH:"EULA Minecraft",e:"Y Launcher безкоштовний і не продає гру чи її вміст. Проєкт підтримують пожертви та партнерства з хостингу серверів.",
+cH:"Структура коду",dH:"Завантажити Y Launcher",dP:"Безкоштовно для Windows. Потрібен JDK 17 або новіший (рекомендовано 21); бракуючі версії Java можна завантажити в налаштуваннях.",db:"Завантажити для Windows",sup:"Підтримати проєкт",msb:"Увійти через Microsoft",rdy:"Готово",more:"Показати ще",dls:"Завантаження почалося",mst:"Вхід через Microsoft поки недоступний",msd:"Поки що можна грати зі збереженим нікнеймом. Вхід через Microsoft додамо в одному з оновлень.",ok:"OK",disc:"Не є офіційним продуктом Minecraft. Не схвалено й не пов’язано з Mojang чи Microsoft.",
+f:[["Профілі","Збережені нікнейми. Вхід через Microsoft поки недоступний."],["Інстанси","Назва, версія Minecraft, завантажувач і його версія — кожен у своїй теці."],["Браузер модів","Моди, шейдери й ресурспаки з пошуком, сортуванням і фільтром за версією."],["Розумне встановлення","Обов’язкові залежності підтягуються, кожен файл перевіряється за SHA-1."],["Менеджер Java","Пошук, вибір або автоматичне завантаження Temurin."],["Чотири мови","Англійська, українська, білоруська та російська, миттєве перемикання."]],
+fe:[["Fabric, Forge і Quilt","І Vanilla. NeoForge поки не підтримується."],["Легкий","Один застосунок JavaFX і лише дві залежності."],["Чистий темний дизайн","Є перемикач світлої теми."],["Запуск за інстансами","Власна тека гри, версія завантажувача та Java."]],
+code:[["mods.*","Клієнт API та інсталятор"],["instance.*","Модель і сховище інстансів"],["account.*","Профілі, сховище Gson, вхід Microsoft"],["LoaderInstaller, ModLoaders","Версії Fabric, Forge і Quilt"],["JavaManager","Пошук і завантаження Java"],["GameInstaller, GameLauncher","Конвеєр запуску"],["i18n.I18n","Живе перемикання мови"],["ui.*","Оболонка, бічна панель, екрани, діалоги"]]}};
+const HL={en:"en-GB",ru:"ru",uk:"uk"},API="https://api.modrinth.com/v2",TYPES=["mod","shader","resourcepack"],SORTS=["relevance","downloads","follows","newest","updated"];
+const LOADERS=[["fabric","Fabric"],["forge","Forge"],["neoforge","NeoForge"],["quilt","Quilt"]],DL_URL="Y-Launcher.exe";
+let VERS=["1.21.4","1.21.1","1.21","1.20.6","1.20.4","1.20.1","1.19.4","1.18.2","1.16.5"];
+// Fallback snapshot used when the live API cannot be reached from the page.
+const DEMO=[["AANobbMI","Sodium","Modern rendering engine for Minecraft.","jellysquid3",["fabric","quilt"],"mod"],["YL3ZoqjG","Lithium","Optimises game logic, physics and AI.","jellysquid3",["fabric","quilt"],"mod"],["P7dR8mSH","Fabric API","Core hooks and tools for Fabric mods.","modmuss50",["fabric","quilt"],"mod"],["nvQzSEkH","Jade","Shows what you are looking at.","Snownee",["fabric","forge","quilt"],"mod"],["YL57xq9U","Iris Shaders","Shader pack support built for Sodium.","coderbot",["fabric","quilt"],"shader"],["1IjD5062","Continuity","Connected textures for resource packs.","PepperCode1",["fabric","quilt"],"resourcepack"]];
+const $=s=>document.querySelector(s);let L="en",type=0,live=null,seq=0,cur=null;
+const fmt=n=>n>=1e6?(n/1e6).toFixed(1)+"M":n>=1e3?Math.round(n/1e3)+"K":""+n;
+function esc(s){return String(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function pick(){try{const s=localStorage.getItem("yl-lang");if(s&&T[s])return s}catch(e){}
+ let tz="";try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(e){}
+ if(/^Europe\/(Moscow|Kaliningrad|Samara|Volgograd|Saratov|Astrakhan|Ulyanovsk|Kirov|Minsk)$/.test(tz))return"ru";
+ if(/^Europe\/(Kyiv|Kiev|Uzhgorod|Zaporozhye|Simferopol)$/.test(tz))return"uk";
+ const n=(navigator.language||"").toLowerCase();if(/^(ru|be)/.test(n))return"ru";if(/^uk/.test(n))return"uk";return"en"}
+async function jget(u){const c=new AbortController(),t=setTimeout(()=>c.abort(),7000);try{const r=await fetch(u,{signal:c.signal});if(!r.ok)throw new Error(r.status);return await r.json()}finally{clearTimeout(t)}}
+function opts(sel,list,first){const v=sel.value;sel.innerHTML=(first!=null?`<option value="">${first}</option>`:"")+list.map(x=>Array.isArray(x)?`<option value="${x[0]}">${x[1]}</option>`:`<option>${x}</option>`).join("");sel.value=v}
+function apply(l){L=l;const t=T[l];document.documentElement.lang=HL[l];$("#lang").value=l;
+ document.querySelectorAll("[data-i]").forEach(e=>e.textContent=t[e.dataset.i]);
+ $("#q").placeholder=t.ph;
+ $("#fc").innerHTML=t.f.map(x=>`<div class="card"><h3>${x[0]}</h3><p>${x[1]}</p></div>`).join("");
+ $("#fe").innerHTML=t.fe.map(x=>`<div><b>${x[0]}</b><span>${x[1]}</span></div>`).join("");
+ $("#code").innerHTML=t.code.map(x=>`<tr><td>${x[0]}</td><td>${x[1]}</td></tr>`).join("");
+ $("#tabs").innerHTML=t.tabs.map((x,i)=>`<button data-t="${i}" class="${i==type?"on":""}">${x}</button>`).join("");
+ opts($("#sort"),t.sorts.map((x,i)=>[SORTS[i],x]));opts($("#ver"),VERS,t.allV);opts($("#ldr"),LOADERS,t.allL);search()}
+let off=0,all=[],tot=0;
+async function search(more){const id=++seq,t=T[L],q=$("#q").value.trim(),v=$("#ver").value,g=$("#ldr").value;
+ $("#ldr").disabled=type!=0;
+ const f=[["project_type:"+TYPES[type]]];if(v)f.push(["versions:"+v]);if(g&&type==0)f.push(["categories:"+g].concat(g=="quilt"?["categories:fabric"]:[]));
+ if(!more){off=0;all=[];$("#res").innerHTML=`<div class="empty">…</div>`}else{const m=$("#more");if(m)m.disabled=true}
+ const u=`${API}/search?query=${encodeURIComponent(q)}&facets=${encodeURIComponent(JSON.stringify(f))}&index=${$("#sort").value||"relevance"}&limit=20&offset=${off}`;let hits,isLive=true;
+ try{const o=await jget(u);hits=o.hits.map(h=>({id:h.project_id,title:h.title,desc:h.description,icon:h.icon_url,author:h.author,dl:h.downloads,type:h.project_type}));tot=o.total_hits}
+ catch(e){isLive=false;hits=DEMO.filter(d=>d[5]==TYPES[type]&&(!q||(d[1]+d[2]).toLowerCase().includes(q.toLowerCase()))&&(!g||type||d[4].includes(g))).map(d=>({id:d[0],title:d[1],desc:d[2],icon:"",author:d[3],dl:0,type:d[5]}));tot=hits.length;all=[]}
+ if(id!=seq)return;live=isLive;off+=hits.length;all=all.concat(hits);
+ $("#cnt").textContent=tot+" "+t.res;$("#src").innerHTML=`<span class="badge ${isLive?"live":"demo"}">${isLive?t.live:t.demo}</span>`;
+ $("#res").innerHTML=all.length?all.map(h=>`<div class="mod"><div class="ic" style="${h.icon?`background-image:url('${esc(h.icon)}')`:""}">${h.icon?"":esc(h.title[0])}</div><div><h4>${esc(h.title)} <small>${t.by} ${esc(h.author)}</small></h4><p>${esc(h.desc)}</p></div><div class="m">${h.dl?`<small>${fmt(h.dl)} ${t.dn}</small>`:""}<button class="btn sm" data-p="${esc(h.id)}" data-n="${esc(h.title)}" data-ty="${h.type}">${t.choose}</button></div></div>`).join("")+(isLive&&all.length<tot&&hits.length?`<div class="more"><button class="btn g" id="more">${t.more}</button></div>`:""):`<div class="empty">${t.none}</div>`}
+async function initTags(){try{const a=await jget(API+"/tag/game_version"),r=a.filter(x=>x.version_type=="release").sort((x,y)=>new Date(y.date)-new Date(x.date)).map(x=>x.version);if(r.length){VERS=r;opts($("#ver"),VERS,T[L].allV)}}catch(e){}}
+function showMs(started){const t=T[L];$("#m2t").textContent=started?t.dls:t.mst;$("#m2d").textContent=(started?t.mst+". ":"")+t.msd;$("#ov2").classList.add("on")}
+async function openV(pid,name,ty){cur={pid,name,ty};$("#dt").textContent=name;
+ opts($("#dv"),VERS);opts($("#dl2"),LOADERS);$("#dv").value=$("#ver").value||VERS[0];$("#dl2").value=$("#ldr").value||"fabric";
+ $("#dl2").parentElement.style.display=ty=="mod"?"":"none";$("#ov").classList.add("on");loadV()}
+async function loadV(){const t=T[L],{pid,ty}=cur,v=$("#dv").value,g=$("#dl2").value;$("#vl").innerHTML=`<div class="empty">…</div>`;
+ let u=`${API}/project/${pid}/version?game_versions=${encodeURIComponent(JSON.stringify([v]))}`;if(ty=="mod")u+=`&loaders=${encodeURIComponent(JSON.stringify(g=="quilt"?["quilt","fabric"]:[g]))}`;
+ try{const a=await jget(u);$("#dd").textContent=`${v}${ty=="mod"?" · "+g:""}`;
+  $("#vl").innerHTML=a.length?a.slice(0,12).map(x=>{const f=x.files.find(f=>f.primary)||x.files[0],c={release:"rel",beta:"bet",alpha:"alp"}[x.version_type]||"";return`<div class="ver"><div>${esc(x.name)}<br><small>${esc(x.version_number)} · <span class="${c}">${x.version_type}</span> · ${x.date_published.slice(0,10)}</small></div><a class="btn sm" href="${esc(f.url)}">${t.get}</a></div>`}).join(""):`<div class="empty">${t.nov}</div>`}
+ catch(e){$("#vl").innerHTML=`<div class="empty">${t.demo}</div>`}}
+$("#lang").onchange=e=>{try{localStorage.setItem("yl-lang",e.target.value)}catch(x){}apply(e.target.value)};
+$("#tabs").onclick=e=>{const b=e.target.closest("button");if(!b)return;type=+b.dataset.t;document.querySelectorAll("#tabs button").forEach((x,i)=>x.classList.toggle("on",i==type));search()};
+let dt;$("#q").oninput=()=>{clearTimeout(dt);dt=setTimeout(search,300)};["#sort","#ver","#ldr"].forEach(s=>$(s).onchange=()=>search());
+$("#res").onclick=e=>{if(e.target.closest("#more"))return search(true);const b=e.target.closest("[data-p]");if(b)openV(b.dataset.p,b.dataset.n,b.dataset.ty)};
+$("#dv").onchange=$("#dl2").onchange=loadV;$("#x").onclick=()=>$("#ov").classList.remove("on");$("#ov").onclick=e=>{if(e.target.id=="ov")$("#ov").classList.remove("on")};
+document.addEventListener("keydown",e=>{if(e.key=="Escape"){$("#ov").classList.remove("on");$("#ov2").classList.remove("on")}});
+document.querySelectorAll("[data-dl]").forEach(a=>{a.href=DL_URL;a.onclick=()=>setTimeout(()=>showMs(true),400)});
+document.querySelectorAll("[data-ms]").forEach(a=>a.onclick=()=>showMs(false));
+$("#m2x").onclick=()=>$("#ov2").classList.remove("on");$("#ov2").onclick=e=>{if(e.target.id=="ov2")$("#ov2").classList.remove("on")};
+apply(pick());initTags();
+</script>
+</body>
+</html>
