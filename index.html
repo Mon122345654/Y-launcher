@@ -72,7 +72,7 @@ footer{border-top:1px solid var(--bd);padding:28px 0;color:var(--mu);font-size:1
 <a class="btn don sm" id="hdon" href="https://donatello.to/monq12" target="_blank" rel="noopener" data-i="sup"></a><select id="lang" aria-label="Language"><option value="en">English (UK)</option><option value="ru">Русский</option><option value="uk">Українська</option></select></div></header>
 <main id="top">
 <div class="w hero"><div><span class="tag" data-i="tag"></span><h1 data-i="h1"></h1><p class="lead" data-i="lead"></p>
-<div class="cta"><a class="btn" href="Y-Launcher.exe" download data-dl data-i="dl"></a><a class="btn g" href="#mods" data-i="try"></a><a class="btn don" href="https://donatello.to/monq12" target="_blank" rel="noopener" data-i="sup"></a></div></div>
+<div class="cta"><a class="btn" href="https://github.com/Y-launcher/ylauncher/releases/download/v1.2.1/Y.Launcher-Installer.exe" data-dl data-i="dl"></a><a class="btn g" href="#mods" data-i="try"></a><a class="btn don" href="https://donatello.to/monq12" target="_blank" rel="noopener" data-i="sup"></a></div></div>
 <div class="app"><div class="sb" aria-hidden="true"><b class="p"></b><b class="a"></b><b></b><b></b><em></em><b></b></div>
 <div class="mn"><h4>Quick Play</h4><div class="pnl"><div class="two"><div><div class="lab">PROFILE</div><div class="fld"><span><i class="cr"></i>Mon1</span><small>Change</small></div></div><div><div class="lab">VERSION</div><div class="fld">1.21.11 <small>▾</small></div></div></div>
 <div class="lab">MOD LOADER</div><div class="seg"><span class="on">Vanilla</span><span>Fabric</span><span>Forge</span></div></div>
@@ -94,7 +94,7 @@ footer{border-top:1px solid var(--bd);padding:28px 0;color:var(--mu);font-size:1
 <div class="w" style="margin-top:34px"><h2 style="font-size:22px" data-i="cH"></h2><div class="tw"><table id="code"></table></div></div></section>
 
 <section id="download"><div class="w"><h2 data-i="dH"></h2><p class="sub" data-i="dP"></p>
-<div class="g3 dls"><div class="card"><h3>Windows</h3><span>.exe</span><a class="btn" href="Y-Launcher.exe" download data-dl data-i="db"></a></div></div></div></section>
+<div class="g3 dls"><div class="card"><h3>Windows</h3><span>.exe</span><a class="btn" href="https://github.com/Y-launcher/ylauncher/releases/download/v1.2.1/Y.Launcher-Installer.exe" data-dl data-i="db"></a></div></div></div></section>
 </main>
 <footer><div class="w"><p><a class="btn don sm" href="https://donatello.to/monq12" target="_blank" rel="noopener" data-i="sup"></a></p><p data-i="disc"></p><p>© 2026 Y Launcher</p></div></footer>
 
@@ -128,7 +128,7 @@ f:[["Профілі","Збережені нікнейми. Вхід через M
 fe:[["Fabric, Forge і Quilt","І Vanilla. NeoForge поки не підтримується."],["Легкий","Один застосунок JavaFX і лише дві залежності."],["Чистий темний дизайн","Є перемикач світлої теми."],["Запуск за інстансами","Власна тека гри, версія завантажувача та Java."]],
 code:[["mods.*","Клієнт API та інсталятор"],["instance.*","Модель і сховище інстансів"],["account.*","Профілі, сховище Gson, вхід Microsoft"],["LoaderInstaller, ModLoaders","Версії Fabric, Forge і Quilt"],["JavaManager","Пошук і завантаження Java"],["GameInstaller, GameLauncher","Конвеєр запуску"],["i18n.I18n","Живе перемикання мови"],["ui.*","Оболонка, бічна панель, екрани, діалоги"]]}};
 const HL={en:"en-GB",ru:"ru",uk:"uk"},API="https://api.modrinth.com/v2",TYPES=["mod","shader","resourcepack"],SORTS=["relevance","downloads","follows","newest","updated"];
-const LOADERS=[["fabric","Fabric"],["forge","Forge"],["neoforge","NeoForge"],["quilt","Quilt"]],DL_URL="Y-Launcher.exe";
+const LOADERS=[["fabric","Fabric"],["forge","Forge"],["neoforge","NeoForge"],["quilt","Quilt"]],DL_URL="https://github.com/Y-launcher/ylauncher/releases/download/v1.2.1/Y.Launcher-Installer.exe";
 let VERS=["1.21.4","1.21.1","1.21","1.20.6","1.20.4","1.20.1","1.19.4","1.18.2","1.16.5"];
 // Fallback snapshot used when the live API cannot be reached from the page.
 const DEMO=[["AANobbMI","Sodium","Modern rendering engine for Minecraft.","jellysquid3",["fabric","quilt"],"mod"],["YL3ZoqjG","Lithium","Optimises game logic, physics and AI.","jellysquid3",["fabric","quilt"],"mod"],["P7dR8mSH","Fabric API","Core hooks and tools for Fabric mods.","modmuss50",["fabric","quilt"],"mod"],["nvQzSEkH","Jade","Shows what you are looking at.","Snownee",["fabric","forge","quilt"],"mod"],["YL57xq9U","Iris Shaders","Shader pack support built for Sodium.","coderbot",["fabric","quilt"],"shader"],["1IjD5062","Continuity","Connected textures for resource packs.","PepperCode1",["fabric","quilt"],"resourcepack"]];
@@ -177,7 +177,7 @@ let dt;$("#q").oninput=()=>{clearTimeout(dt);dt=setTimeout(search,300)};["#sort"
 $("#res").onclick=e=>{if(e.target.closest("#more"))return search(true);const b=e.target.closest("[data-p]");if(b)openV(b.dataset.p,b.dataset.n,b.dataset.ty)};
 $("#dv").onchange=$("#dl2").onchange=loadV;$("#x").onclick=()=>$("#ov").classList.remove("on");$("#ov").onclick=e=>{if(e.target.id=="ov")$("#ov").classList.remove("on")};
 document.addEventListener("keydown",e=>{if(e.key=="Escape"){$("#ov").classList.remove("on");$("#ov2").classList.remove("on")}});
-document.querySelectorAll("[data-dl]").forEach(a=>{a.href=DL_URL;a.onclick=()=>setTimeout(()=>showMs(true),400)});
+document.querySelectorAll("[data-dl]").forEach(a=>{a.href=DL_URL});
 document.querySelectorAll("[data-ms]").forEach(a=>a.onclick=()=>showMs(false));
 $("#m2x").onclick=()=>$("#ov2").classList.remove("on");$("#ov2").onclick=e=>{if(e.target.id=="ov2")$("#ov2").classList.remove("on")};
 apply(pick());initTags();
