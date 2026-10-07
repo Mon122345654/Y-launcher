@@ -105,6 +105,21 @@ table{width:100%;border-collapse:collapse;font-size:13.5px}td{padding:8px 10px;b
 .dls .card{display:flex;flex-direction:column;gap:6px}.dls span{color:var(--mu);font-size:13px;margin-bottom:8px}.dls .card:hover{border-color:var(--ac)}
 #toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0));transform:translate(-50%,20px);background:var(--ac);color:#06170d;font-weight:700;padding:10px 18px;border-radius:12px;opacity:0;pointer-events:none;transition:.25s;z-index:30;max-width:90vw;text-align:center}#toast.on{opacity:1;transform:translate(-50%,0)}
 footer{border-top:1px solid var(--bd);padding:28px 0;color:var(--mu);font-size:13.5px;text-align:center}
+/* ===== Релизы (автоматически с GitHub) ===== */
+.rels{display:grid;gap:12px}
+.rel-c{background:var(--s);border:1px solid var(--bd);border-radius:14px;padding:16px 18px;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s,border-color .3s,background-color .35s;animation:fadeUp .5s cubic-bezier(.2,.7,.2,1) both}
+.rel-c:hover{transform:translateY(-3px);border-color:var(--ac);box-shadow:0 12px 30px -16px var(--glow)}
+.rel-c.new{border-color:var(--ac);box-shadow:0 14px 34px -18px var(--glow)}
+.rel-h{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.rel-h h3{margin:0;font-size:18px}
+.rel-h small{color:var(--mu);margin-left:auto}
+.rel-n{color:var(--mu);font-size:13.5px;margin:8px 0 0;white-space:pre-line}
+.rel-f{display:flex;align-items:center;gap:12px;background:var(--s2);border-radius:10px;padding:8px 12px;margin-top:10px;flex-wrap:wrap}
+.rel-f .nm{font-weight:600;word-break:break-all}
+.rel-f .meta{color:var(--mu);font-size:12.5px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.rel-f .meta b{background:var(--soft);color:var(--ac);border-radius:6px;padding:0 8px;font-weight:700}
+.rel-f .btn{margin-left:auto}
+.pre{background:rgba(255,196,60,.14);color:#ffc43c}
 /* ===== Reveal-on-scroll ===== */
 .rv{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
 .rv.vis{opacity:1;transform:none}
@@ -126,7 +141,7 @@ footer{border-top:1px solid var(--bd);padding:28px 0;color:var(--mu);font-size:1
 @keyframes shine{to{background-position:-220% 0}}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 var(--glow)}50%{box-shadow:0 0 0 10px transparent}}
 @keyframes slidebar{0%{left:-40%}50%{left:105%}100%{left:-40%}}
-@media(max-width:860px){#hdon{margin-left:auto}#hdon+#sthm{margin-left:0}.hero,.ab,.g3{grid-template-columns:1fr}nav{display:none}.fl{grid-template-columns:1fr 1fr}.fl input{grid-column:1/-1}.mod .m small{display:none}}
+@media(max-width:860px){#hdon{margin-left:auto}#hdon+#sthm{margin-left:0}.hero,.ab,.g3{grid-template-columns:1fr}nav{display:none}.fl{grid-template-columns:1fr 1fr}.fl input{grid-column:1/-1}.mod .m small{display:none}.rel-f .btn{margin-left:0}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}}
 </style>
 </head>
@@ -166,7 +181,7 @@ footer{border-top:1px solid var(--bd);padding:28px 0;color:var(--mu);font-size:1
 <div class="g3" id="tv"></div></div></section>
 
 <section id="download"><div class="w"><h2 data-i="dH"></h2><p class="sub" data-i="dP"></p>
-<div class="g3 dls"><div class="card"><h3>Windows</h3><span>.zip</span><a class="btn" href="https://github.com/Y-launcher/ylauncher/releases/download/V1.3.0/YLauncher.zip" data-dl data-i="db"></a></div></div></div></section>
+<div class="rels" id="rels"></div></div></section>
 </main>
 <footer><div class="w"><p><a class="btn don sm" href="https://donatello.to/monq12" target="_blank" rel="noopener" data-i="sup"></a></p><p data-i="disc"></p><p>© 2026 Y Launcher</p></div></footer>
 
@@ -239,7 +254,7 @@ function apply(l){L=l;const t=T[l];document.documentElement.lang=HL[l];$("#lang"
  $("#fe").innerHTML=t.fe.map(x=>`<div><b>${x[0]}</b><span>${x[1]}</span></div>`).join("");
  $("#code").innerHTML=t.code.map(x=>`<tr><td>${x[0]}</td><td>${x[1]}</td></tr>`).join("");
  $("#tabs").innerHTML=t.tabs.map((x,i)=>`<button data-t="${i}" class="${i==type?"on":""}">${x}</button>`).join("");
- opts($("#sort"),t.sorts.map((x,i)=>[SORTS[i],x]));opts($("#ver"),VERS,t.allV);opts($("#ldr"),LOADERS,t.allL);search()}
+ opts($("#sort"),t.sorts.map((x,i)=>[SORTS[i],x]));opts($("#ver"),VERS,t.allV);opts($("#ldr"),LOADERS,t.allL);search();renderRel()}
 let off=0,all=[],tot=0;
 async function search(more){const id=++seq,t=T[L],q=$("#q").value.trim(),v=$("#ver").value,g=$("#ldr").value;
  $("#ldr").disabled=type!=0;
@@ -271,7 +286,34 @@ document.querySelectorAll("[data-dl]").forEach(a=>{a.href=DL_URL});
 document.querySelectorAll("[data-ms]").forEach(a=>a.onclick=()=>showMs(false));
 $("#m2x").onclick=()=>$("#ov2").classList.remove("on");$("#ov2").onclick=e=>{if(e.target.id=="ov2")$("#ov2").classList.remove("on")};
 $("#thm").onclick=()=>{const l=$("#win").classList.toggle("light");$("#thm").textContent=l?"☀":"☾";$("#thm").setAttribute("aria-pressed",l)};
-apply(pick());initTags();
+
+/* ===== Автоматические релизы с GitHub ===== */
+const REPO="Y-launcher/ylauncher";
+const R={
+en:{latest:"Latest",pre:"Pre-release",size:"Size",dn:"downloads",get:"Download",err:"Could not load versions.",all:"All releases on GitHub",mb:"MB",kb:"KB"},
+ru:{latest:"Последняя",pre:"Пре-релиз",size:"Вес",dn:"загрузок",get:"Скачать",err:"Не удалось загрузить версии.",all:"Все релизы на GitHub",mb:"МБ",kb:"КБ"},
+uk:{latest:"Остання",pre:"Пре-реліз",size:"Вага",dn:"завантажень",get:"Завантажити",err:"Не вдалося завантажити версії.",all:"Усі релізи на GitHub",mb:"МБ",kb:"КБ"}};
+let RELS=null;
+function sizeOf(b,t){return b>=1048576?(b/1048576).toFixed(1)+" "+t.mb:Math.max(1,Math.round(b/1024))+" "+t.kb}
+function extOf(n){const i=n.lastIndexOf(".");return i>-1?n.slice(i+1).toUpperCase():"FILE"}
+function renderRel(){const box=$("#rels");if(!box)return;const t=R[L];
+ if(!RELS){box.innerHTML=`<div class="empty">…</div>`;return}
+ if(RELS==="err"){box.innerHTML=`<div class="empty">${t.err}<br><br><a class="btn sm" href="https://github.com/${REPO}/releases" target="_blank" rel="noopener">${t.all}</a></div>`;return}
+ const fs=RELS.findIndex(r=>!r.pre);
+ box.innerHTML=RELS.map((r,i)=>{
+  const d=new Date(r.d).toLocaleDateString(HL[L],{year:"numeric",month:"long",day:"numeric"});
+  const notes=r.b.trim().slice(0,300);
+  const files=r.a.map(a=>`<div class="rel-f"><div><div class="nm">${esc(a.n)}</div><div class="meta"><b>${esc(extOf(a.n))}</b><span>${t.size}: ${sizeOf(a.s,t)}</span><span>· ${a.c} ${t.dn}</span></div></div><a class="btn sm" href="${esc(a.u)}" rel="noopener">${t.get}</a></div>`).join("");
+  return `<div class="rel-c${i===fs?" new":""}" style="animation-delay:${Math.min(i,8)*.06}s"><div class="rel-h"><h3>${esc(r.n)}</h3>${i===fs?`<span class="badge live">${t.latest}</span>`:""}${r.pre?`<span class="badge pre">${t.pre}</span>`:""}<small>${d}</small></div>${notes?`<p class="rel-n">${esc(notes)}</p>`:""}${files}</div>`}).join("")}
+async function loadRels(){
+ try{const c=sessionStorage.getItem("yl-rel");if(c){const o=JSON.parse(c);if(Date.now()-o.t<600000){RELS=o.d;renderRel();return}}}catch(e){}
+ try{const a=await jget(`https://api.github.com/repos/${REPO}/releases?per_page=30`);
+  RELS=a.filter(r=>!r.draft).map(r=>({n:r.name||r.tag_name,d:r.published_at,pre:r.prerelease,b:r.body||"",a:r.assets.map(x=>({n:x.name,s:x.size,u:x.browser_download_url,c:x.download_count}))}));
+  try{sessionStorage.setItem("yl-rel",JSON.stringify({t:Date.now(),d:RELS}))}catch(e){}
+ }catch(e){RELS="err"}
+ renderRel()}
+
+apply(pick());initTags();loadRels();
 
 /* ===== Тема всего сайта (светлая по умолчанию) ===== */
 (function(){const st=$("#sthm");
